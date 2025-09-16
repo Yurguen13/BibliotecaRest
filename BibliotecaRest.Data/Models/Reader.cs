@@ -22,5 +22,7 @@ namespace BibliotecaRest.Data.Models
         public string Email { get; set; }
         [MaxLength(120)]
         public string City { get; set; }
+
+        public ICollection<Loans> Loans { get; set; } = new List<Loans>();
     }
 }

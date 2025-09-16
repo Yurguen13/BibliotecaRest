@@ -18,6 +18,8 @@ namespace BibliotecaRest.Data.Models
         [MaxLength(255)]
         public string Description { get; set; }
 
+        public ICollection<BookCategory> BookCategories { get; set; }
+
 
     }
 }

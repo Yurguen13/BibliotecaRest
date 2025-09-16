@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BibliotecaRest.Data.Models
 {
-    public class Autor : Registry
+    public class Author : Registry
     {
         public int Id { get; set; }
         [Required]
@@ -24,6 +24,8 @@ namespace BibliotecaRest.Data.Models
 
         public DateTime birthdate { get; set; }
         public string Phone { get; set; }
+
+        public ICollection<BookAuthor> BookAuthor { get; set; }  = new List<BookAuthor>();
 
     }
 }

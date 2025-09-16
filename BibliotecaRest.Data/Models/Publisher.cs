@@ -19,6 +19,8 @@ namespace BibliotecaRest.Data.Models
         [MaxLength(10)]
         public string Phone { get; set; } 
 
+        public ICollection<Books> Books { get; set; }
+
         
     }
 }
