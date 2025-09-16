@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliotecaRest.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250916021845_Initialize")]
-    partial class Initialize
+    [Migration("20250916035547_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,6 +145,9 @@ namespace BibliotecaRest.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int>("ClassificationId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -168,6 +171,8 @@ namespace BibliotecaRest.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassificationId");
 
                     b.HasIndex("PublisherId");
 
@@ -204,6 +209,43 @@ namespace BibliotecaRest.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("BibliotecaRest.Data.Models.Classification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classifications");
                 });
 
             modelBuilder.Entity("BibliotecaRest.Data.Models.Loans", b =>
@@ -411,11 +453,19 @@ namespace BibliotecaRest.Data.Migrations
 
             modelBuilder.Entity("BibliotecaRest.Data.Models.Books", b =>
                 {
+                    b.HasOne("BibliotecaRest.Data.Models.Classification", "Classification")
+                        .WithMany("Books")
+                        .HasForeignKey("ClassificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("BibliotecaRest.Data.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Classification");
 
                     b.Navigation("Publisher");
                 });
@@ -467,6 +517,11 @@ namespace BibliotecaRest.Data.Migrations
             modelBuilder.Entity("BibliotecaRest.Data.Models.Category", b =>
                 {
                     b.Navigation("BookCategories");
+                });
+
+            modelBuilder.Entity("BibliotecaRest.Data.Models.Classification", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("BibliotecaRest.Data.Models.Publisher", b =>

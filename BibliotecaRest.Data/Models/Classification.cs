@@ -23,9 +23,14 @@ namespace BibliotecaRest.Data.Models
         public string Code { get; set; }
 
 
+        public ICollection<Books> Books { get; set; }
 
 
-        
+
+
+
+
+
 
 
     }

@@ -77,13 +77,14 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             
         }
 
+        public Task<CategoryReadDto> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-
-
-
-
-
-
-
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
