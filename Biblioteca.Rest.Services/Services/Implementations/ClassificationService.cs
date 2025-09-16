@@ -9,6 +9,7 @@ using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
 using BibliotecaRest.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace Biblioteca.Rest.Services.Services.Implementations
 {
@@ -22,7 +23,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<ClassificationReadDTO>> GetAllAsync()
+        public async Task<ICollection<ClassificationReadDTO>> GetAllAsync()
         {
            var classifications = await _context.Classifications
                 .Where(c => !c.IsDeleted)
@@ -68,7 +69,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             classificationDTO.Id = classification.Id;
         } 
 
-        public async Task UpdateAsync(ClassificationCreateDTO classificationDTO)
+        public async Task UpdateAsync(int id,ClassificationCreateDTO classificationDTO)
         {
             var classification = await _context.Classifications
                 .FindAsync(classificationDTO.Id);
@@ -96,16 +97,6 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             classification.Active = false;
             _context.Classifications.Update(classification);
             await _context.SaveChangesAsync();
-        }
-
-        Task<ICollection<ClassificationReadDTO>> IGenericService<ClassificationCreateDTO, ClassificationReadDTO, ClassificationCreateDTO>.GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(int id, ClassificationCreateDTO tcreatDto)
-        {
-            throw new NotImplementedException();
         }
     }
 }
