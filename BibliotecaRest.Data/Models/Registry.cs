@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BibliotecaRest.Data.Models
 {
     // con se soluciona para que no lo mapee
-    [NotMapped]
+    
     public class Registry
     {
         public bool Active { get; set; } = true;

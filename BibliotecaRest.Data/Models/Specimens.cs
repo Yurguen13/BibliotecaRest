@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibliotecaRest.Data.Models
 {
-    public class Specimens
+    public class Specimens : Registry
     {
         public  int Id { get; set; }    
         public Decimal Price { get; set; }
