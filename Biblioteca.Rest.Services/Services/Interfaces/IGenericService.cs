@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblioteca.Rest.Services.Settings.Implementations
+namespace Biblioteca.Rest.Services.Services.Interfaces
 {
-    internal class Class1
+    public interface IGenericService
     {
     }
 }
