@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BibliotecaRest.Data.Models
 {
-    public class Classification
+    public class Classification : Registry
     {
         public int Id { get; set; }
 

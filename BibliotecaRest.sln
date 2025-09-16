@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaRest", "Bibliotec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliotecaRest.Data", "BibliotecaRest.Data\BibliotecaRest.Data.csproj", "{72E75D8F-2F09-456B-8200-9182265BC4E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Rest.Services", "Biblioteca.Rest.Services\Biblioteca.Rest.Services.csproj", "{55A58A4E-4A78-4368-B6AA-CB7337465665}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{72E75D8F-2F09-456B-8200-9182265BC4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72E75D8F-2F09-456B-8200-9182265BC4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72E75D8F-2F09-456B-8200-9182265BC4E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A58A4E-4A78-4368-B6AA-CB7337465665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A58A4E-4A78-4368-B6AA-CB7337465665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A58A4E-4A78-4368-B6AA-CB7337465665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A58A4E-4A78-4368-B6AA-CB7337465665}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
