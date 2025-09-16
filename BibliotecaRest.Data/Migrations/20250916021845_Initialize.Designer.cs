@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BibliotecaRest.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250916020641_Initializale")]
-    partial class Initializale
+    [Migration("20250916021845_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
