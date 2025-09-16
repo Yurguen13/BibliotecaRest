@@ -1,6 +1,8 @@
 ﻿using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data;
+using BibliotecaRest.Data.Data;
+using BibliotecaRest.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,7 +39,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
 
         }
 
-        public async Task<CategoryReadDto> GetById(int id)
+        public async Task<CategoryReadDto> GetByIdAsync(int id)
         {
          var categories =  await _context.Category
                 .Where(x => x.Id == id)
@@ -91,10 +93,34 @@ namespace Biblioteca.Rest.Services.Services.Implementations
 
      
 
-        public Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-         
-            var 
+
+            try
+            {
+                var category = await _context.Category
+            .FindAsync(id);
+                if (category == null)
+                    throw new Exception("No se encuentra el producto");
+
+                category.IsDeleted = true;
+                category.Active = false;
+                await _context.SaveChangesAsync();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        
+
+
+            
         }
+
+
     }
 }

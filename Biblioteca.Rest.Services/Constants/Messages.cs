@@ -47,6 +47,8 @@ namespace Biblioteca.Rest.Services.Constants
             //-----Delete-----
                 //Classification
             public const string ClassificationDeleteError = "Hubo un eror al eliminar la clasificacion";
+            public const string CategoryNotFound = "No se encontro la categoría";
+            public const string CategoryBadRequest = "Hubo un error al mandar los datos";
         }
     }
 }

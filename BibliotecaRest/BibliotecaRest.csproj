@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Rest.Services\Biblioteca.Rest.Services.csproj" />
     <ProjectReference Include="..\BibliotecaRest.Data\BibliotecaRest.Data.csproj" />
   </ItemGroup>
 
