@@ -56,26 +56,30 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             return classification;
         }
 
-        public async Task AddAsync(ClassificationCreateDTO classificationDTO)
+        public async Task<bool> AddAsync(ClassificationCreateDTO classificationDTO)
         {
             var classification = new Classification
             {
                 Name = classificationDTO.Name,
                 Description = classificationDTO.Description,
                 Code = classificationDTO.Code,
+                IsDeleted = false
             };
             await _context.Classifications.AddAsync(classification);
             await _context.SaveChangesAsync();
             classificationDTO.Id = classification.Id;
+
+            return true;
         } 
 
-        public async Task UpdateAsync(int id,ClassificationCreateDTO classificationDTO)
+        public async Task<bool> UpdateAsync(int id,ClassificationCreateDTO classificationDTO)
         {
             var classification = await _context.Classifications
                 .FindAsync(classificationDTO.Id);
 
             if (classification == null)
                 throw new ApplicationException(Messages.Error.ClassificationNotFound);
+
 
             classification.Name = classificationDTO.Name;
             classification.Description = classificationDTO.Description;
@@ -84,19 +88,22 @@ namespace Biblioteca.Rest.Services.Services.Implementations
 
             _context.Classifications.Update(classification);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var classification = await _context.Classifications
+            var classification  = await _context.Classifications
                 .FindAsync(id);
 
             if (classification == null)
                 throw new ApplicationException(Messages.Error.ClassificationNotFound);
 
-            classification.Active = false;
+            classification.IsDeleted = true;
             _context.Classifications.Update(classification);
             await _context.SaveChangesAsync();
+            
+            return true;
         }
     }
 }
