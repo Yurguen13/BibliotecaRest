@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BibliotecaRest.Data/Migrations/20250916043654_Initialize.cs
+/BibliotecaRest.Data/Migrations/20250916043654_Initialize.Designer.cs
+/BibliotecaRest/appsettings.json
+/BibliotecaRest.Data/BibliotecaRest.Data.csproj

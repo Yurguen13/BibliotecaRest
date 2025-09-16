@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Biblioteca.Rest.Services.Constants;
 using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
+using BibliotecaRest.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace Biblioteca.Rest.Services.Services.Implementations
 {
-    /*
+    
     public class ClassificationService : IClassificationService
     {
         private readonly ApplicationDbContext _context;
@@ -20,7 +23,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<ClassificationReadDTO>> GetAllAsync()
+        public async Task<ICollection<ClassificationReadDTO>> GetAllAsync()
         {
            var classifications = await _context.Classifications
                 .Where(c => !c.IsDeleted)
@@ -31,12 +34,69 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                     Description = c.Description,
                     Code = c.Code,
                 })
-                .ToList();
+                .ToListAsync();
             return classifications;
         }
 
+        public async Task<ClassificationReadDTO> GetByIdAsync(int id)
+        {
+            var classification = await _context.Classifications
+                .Where(c => c.Id == id && !c.IsDeleted)
+                .Select(c => new ClassificationReadDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    Code = c.Code,
+                })
+                .FirstOrDefaultAsync();
+            if(classification == null)
+                throw new ApplicationException(string.Format(Messages.Error.ClassificationNotFoundWithId, id));
+
+            return classification;
+        }
+
+        public async Task AddAsync(ClassificationCreateDTO classificationDTO)
+        {
+            var classification = new Classification
+            {
+                Name = classificationDTO.Name,
+                Description = classificationDTO.Description,
+                Code = classificationDTO.Code,
+            };
+            await _context.Classifications.AddAsync(classification);
+            await _context.SaveChangesAsync();
+            classificationDTO.Id = classification.Id;
+        } 
+
+        public async Task UpdateAsync(int id,ClassificationCreateDTO classificationDTO)
+        {
+            var classification = await _context.Classifications
+                .FindAsync(classificationDTO.Id);
+
+            if (classification == null)
+                throw new ApplicationException(Messages.Error.ClassificationNotFound);
+
+            classification.Name = classificationDTO.Name;
+            classification.Description = classificationDTO.Description;
+            classification.Code = classificationDTO.Code;
 
 
+            _context.Classifications.Update(classification);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var classification = await _context.Classifications
+                .FindAsync(id);
+
+            if (classification == null)
+                throw new ApplicationException(Messages.Error.ClassificationNotFound);
+
+            classification.Active = false;
+            _context.Classifications.Update(classification);
+            await _context.SaveChangesAsync();
+        }
     }
-    */
 }
