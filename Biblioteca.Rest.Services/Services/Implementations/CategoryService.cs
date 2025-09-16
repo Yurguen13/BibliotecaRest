@@ -1,7 +1,6 @@
 ﻿using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
-using BibliotecaRest.Data.Data;
-using BibliotecaRest.Data.Models;
+using BibliotecaRest.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
