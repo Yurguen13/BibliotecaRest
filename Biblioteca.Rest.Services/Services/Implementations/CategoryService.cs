@@ -53,7 +53,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             return categories;
         }
 
-        public async Task AddAsync(CategoryCreateDto category)
+        public async Task<bool> AddAsync(CategoryCreateDto category)
         {
             try
             {
@@ -63,28 +63,39 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                 cate.Description = category.Description;
                 await _context.Category.AddAsync(cate);
                 await _context.SaveChangesAsync();
+                return true;
                     
 
             }catch (Exception ex)
             {
+                return false;
 
             }
         }
 
-        public async Task UpdateAsync(int id , CategoryCreateDto category)
+        public async Task<bool>UpdateAsync(int id , CategoryCreateDto cate)
         {
+            var category = await _context.Category.FindAsync(id);
+
+            if(category == null)
+            {
+                return false;
+            }
+            category.Name = cate.Name;
+            category.Description = cate.Description;
+            await _context.SaveChangesAsync();
+
+            return true;
 
             
         }
 
-        public Task<CategoryReadDto> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+     
 
         public Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+         
+            var 
         }
     }
 }
