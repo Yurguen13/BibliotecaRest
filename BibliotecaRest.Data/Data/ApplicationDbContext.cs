@@ -1,7 +1,7 @@
 ﻿using BibliotecaRest.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BibliotecaRest.Data.Data
+namespace BibliotecaRest.Data.Data 
 {
     public class ApplicationDbContext : DbContext
     {

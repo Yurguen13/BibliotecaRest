@@ -14,9 +14,9 @@ namespace Biblioteca.Rest.Services.Services.Interfaces
 
         Task<ICollection<TReadDto>> GetAllAsync();
         Task<TReadDto> GetByIdAsync(int id);
-        Task AddAsync(TCreatDto creatDto);
-        Task UpdateAsync(int id, TCreatDto tcreatDto);
-        Task DeleteAsync(int id);
+        Task<bool> AddAsync(TCreatDto creatDto);
+        Task<bool> UpdateAsync(int id, TCreatDto tcreatDto);
+        Task<bool> DeleteAsync(int id);
 
       
 
