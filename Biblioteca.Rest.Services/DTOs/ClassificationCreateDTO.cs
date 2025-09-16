@@ -11,13 +11,13 @@ namespace Biblioteca.Rest.Services.DTOs
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
+        [Required(ErrorMessage = "Nombre es requerido")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage ="Description is required")]
+        [Required(ErrorMessage ="La descripcion es requerida")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Code is required")]
+        [Required(ErrorMessage = "El codigo es requerido")]
         public string Code { get; set; }
     }
 }

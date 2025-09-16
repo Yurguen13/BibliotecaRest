@@ -15,7 +15,7 @@ namespace BibliotecaRest.Data.Data
         public DbSet<Classification> Classifications {  get; set; }
         public DbSet<BookCategory> BookCategory { get; set; }
         public DbSet<Specimens> Specimens { get; set; }
-        public DbSet<Loans> Loans { get; set; }
+        public DbSet<Loans> Loans { get; set; } 
         public DbSet<Books> Books { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
@@ -23,4 +23,3 @@ namespace BibliotecaRest.Data.Data
 
     }
 }
-
