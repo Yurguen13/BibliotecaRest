@@ -31,12 +31,27 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                     Description = c.Description,
                     Code = c.Code,
                 })
-                .ToList();
+                .ToListAsync();
             return classifications;
         }
 
+        public async Task<ClassificationReadDTO> GetByIdAsync(int id)
+        {
+            var classification = await _context.Classifications
+                .Where(c => c.Id == id && !c.IsDeleted)
+                .Select(c => new ClassificationReadDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    Code = c.Code,
+                })
+                .FirstOrDefaultAsync();
+            if(classification == null)
+                throw new ApplicationException(string.Format(Messages.Error.ProductNotFoundWithId, id));
 
+            return classification;
+        }
 
-    }
-    */
+    }*/
 }
