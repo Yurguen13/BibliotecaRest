@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Rest.Services.Services.Implementations
 {
@@ -16,5 +18,23 @@ namespace Biblioteca.Rest.Services.Services.Implementations
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<ClassificationReadDTO>> GetAllAsync()
+        {
+            var classifications = await _context.Classifications
+                .Where(c => !c.IsDeleted)
+                .Select(c => new ClassificationReadDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    Code = c.Code,
+                })
+                .ToList();
+            return classifications;
+        }
+
+
+
     }
 }

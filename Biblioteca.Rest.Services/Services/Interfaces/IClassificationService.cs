@@ -7,7 +7,7 @@ using Biblioteca.Rest.Services.DTOs;
 
 namespace Biblioteca.Rest.Services.Services.Interfaces
 {
-    public interface IClassificationService :IGenericService<ClassificationCreateDTO, ClassificationReadDTO>
+    public interface IClassificationService : IGenericService<ClassificationCreateDTO, ClassificationReadDTO, ClassificationCreateDTO>
     {
        
     }

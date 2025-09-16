@@ -11,11 +11,8 @@ namespace BibliotecaRest.Data.Data
         public DbSet<Author> Authors {  get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<BookCategory> BookCategories { get; set; }
-        
-
         public DbSet<Reader> Readers { get; set; }
-        
-        
+        public DbSet<Classification> Classifications {  get; set; }
         public DbSet<BookCategory> BookCategory { get; set; }
         public DbSet<Specimens> Specimens { get; set; }
         public DbSet<Loans> Loans { get; set; }
