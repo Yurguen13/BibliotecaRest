@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Rest.Services.Services.Implementations
 {
+    /*
     public class ClassificationService : IClassificationService
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
 
         public async Task<IEnumerable<ClassificationReadDTO>> GetAllAsync()
         {
-            var classifications = await _context.Classifications
+           var classifications = await _context.Classifications
                 .Where(c => !c.IsDeleted)
                 .Select(c => new ClassificationReadDTO
                 {
@@ -37,4 +38,5 @@ namespace Biblioteca.Rest.Services.Services.Implementations
 
 
     }
+    */
 }
