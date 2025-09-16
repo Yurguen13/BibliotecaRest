@@ -8,27 +8,18 @@ using Biblioteca.Rest.Services.Constants;
 using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
+using BibliotecaRest.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Rest.Services.Services.Implementations
 {
-    public class PublisherService : ICategoryService
+    public class PublisherService : IPublisherService
     {
         private readonly ApplicationDbContext _context;
 
         public PublisherService(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        public Task<bool> AddAsync(CategoryCreateDto creatDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<ICollection<PublisherReadDTO>> GetAllAsync()
@@ -65,19 +56,54 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                 return publisher;
         }
 
-        public Task<bool> UpdateAsync(int id, CategoryCreateDto tcreatDto)//ELIMINAR
+        public async Task<bool> AddAsync(PublisherCreateDTO publisherDTO)
         {
-            throw new NotImplementedException();
+            var publisher = new Publisher
+            {
+                Name = publisherDTO.Name,
+                City = publisherDTO.City,
+                Country = publisherDTO.Country,
+                Phone = publisherDTO.Phone,
+            };
+            await _context.Publisher.AddAsync(publisher);
+            await _context.SaveChangesAsync();
+            publisher.Id = publisher.Id;
+
+            return true;
         }
 
-        Task<ICollection<CategoryReadDto>> IGenericService<CategoryCreateDto, CategoryReadDto, CategoryCreateDto>.GetAllAsync()//ELIMINAR
+        public async Task<bool> UpdateAsync(int id, PublisherCreateDTO publisherDTO)
         {
-            throw new NotImplementedException();
+            var publisher = await _context.Publisher
+                .FindAsync(publisherDTO.Id);
+
+            if(publisher == null)
+                throw new ApplicationException(Messages.Error.PublisherNotFound);
+
+            publisher.Name = publisherDTO.Name;
+            publisher.City = publisherDTO.City;
+            publisher.Country = publisherDTO.Country;
+            publisher.Phone = publisherDTO.Phone;
+
+            _context.Publisher.Update(publisher);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
-        Task<CategoryReadDto> IGenericService<CategoryCreateDto, CategoryReadDto, CategoryCreateDto>.GetByIdAsync(int id)//ELIMINAR
+        public async Task<bool>DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var publisher = await _context.Publisher
+                .FindAsync(id);
+
+            if(publisher == null)
+                throw new ApplicationException(Messages.Error.PublisherNotFoundWithId);
+
+            publisher.IsDeleted = true;
+            _context.Publisher.Update(publisher);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -9,6 +9,6 @@ namespace Biblioteca.Rest.Services.Services.Interfaces
 {
     public interface IPublisherService : IGenericService<PublisherCreateDTO, PublisherReadDTO, PublisherCreateDTO>
     {
-
+      
     }
 }
