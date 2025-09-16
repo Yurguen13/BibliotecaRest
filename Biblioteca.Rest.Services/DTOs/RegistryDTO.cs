@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Rest.Services.DTOs
 {
-    internal class Class1
+    public class RegistryDTO
     {
+        public bool Active { get; set; } = true;
+        
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
