@@ -8,7 +8,7 @@ namespace BibliotecaRest.Data.Models
 {
     public class Specimens
     {
-        int Id { get; set; }    
+        public  int Id { get; set; }    
         public Decimal Price { get; set; }
         public int  BooksId { get; set; }
         public string Condition { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibliotecaRest.Data.Models
 {
-    public class BookCategory
+    public class BookCategory : Registry
     {
         public int Id { get; set; }
 
