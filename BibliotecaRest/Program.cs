@@ -1,4 +1,6 @@
-﻿using BibliotecaRest.Data.Data;
+﻿using Biblioteca.Rest.Services.Services.Implementations;
+using Biblioteca.Rest.Services.Services.Interfaces;
+using BibliotecaRest.Data.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.GetName().Name) // ← automático
     )
 );
+
+#region
+// uno por request
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IAuthosService, AuthorService>();
+
+
+
+#endregion
 
 var app = builder.Build();
 

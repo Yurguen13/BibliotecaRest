@@ -5,27 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibliotecaRest.Data.Models
+namespace Biblioteca.Rest.Services.DTOs
 {
-    public class Author : Registry
+    public class AuthorReadDto : RegistryDTO
     {
         public int Id { get; set; }
-        [Required]
-        [MaxLength(100)]
+    
         public string Name { get; set; }
-        [Required]
-        [MaxLength(100)]
+     
         public string LastName { get; set; }
-        [Required]
-        [MaxLength(100)]
+     
         public string Email { get; set; }
-        [Required]
-        [MaxLength(100)]
+     
 
         public DateTime Birthdate { get; set; }
         public string Phone { get; set; }
-
-        public ICollection<BookAuthor> BookAuthor { get; set; }  = new List<BookAuthor>();
-
     }
 }

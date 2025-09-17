@@ -26,7 +26,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
         {
 
          var categoria  =   await _context.Category
-                .Where(x => !x.IsDeleted && !x.Active)
+                .Where(x => !x.IsDeleted && x.Active)
                 .Select(x => new CategoryReadDto
                 {
                     Id= x.Id,
@@ -42,7 +42,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
         public async Task<CategoryReadDto> GetByIdAsync(int id)
         {
          var categories =  await _context.Category
-                .Where(x => x.Id == id)
+                .Where(x => x.Id == id && !x.IsDeleted && x.Active)
                 .Select(x => new CategoryReadDto
                 {
                     Id = x.Id,
@@ -59,7 +59,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             try
             {
                 Category cate = new Category();
-                cate.Id = category.Id;
+              //  cate.Id = category.Id;
                 cate.Name = category.Name;
                 cate.Description = category.Description;
                 await _context.Category.AddAsync(cate);

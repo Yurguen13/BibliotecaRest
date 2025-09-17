@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaRest.Controllers
 {
-    [Route("api/category")]
+    [Route("api/v1/category")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -47,7 +47,7 @@ namespace BibliotecaRest.Controllers
                 await _categoryService.AddAsync(create);
                 return CreatedAtAction(nameof(GetById),
                     new { id = create.Id },
-                    create);
+                    create); 
 
             }
             catch (Exception ex)
