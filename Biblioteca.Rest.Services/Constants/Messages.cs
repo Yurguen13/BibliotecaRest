@@ -35,6 +35,10 @@ namespace Biblioteca.Rest.Services.Constants
             public const string ClassificationNotFoundWithId = "Clasificacion con ID {0} no encontrado";
             public const string ClassificationNotFound = "Clasificacion no encontrado";
 
+            //Publisher
+            public const string PublisherNotFoundWithId = "Publisher con ID {0} no encontrado";
+            public const string PublisherNotFound = "Publisher no encontrado";
+
             //-----Create-----
                 //Classification
             public const string ClassificationCreateError = "Hubo un error al crear la clasificacion";
