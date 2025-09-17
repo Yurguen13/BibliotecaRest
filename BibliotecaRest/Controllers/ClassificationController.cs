@@ -32,7 +32,7 @@ namespace BibliotecaRest.Controllers
 
             if (classification == null)
             {
-                return NotFound(new { messagew = "La clasificacion no existe" });
+                return NotFound(new { message = "La clasificacion no existe" });
             }
 
             return Ok(classification);
