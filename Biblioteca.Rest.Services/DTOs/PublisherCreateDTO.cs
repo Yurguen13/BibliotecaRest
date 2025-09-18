@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Rest.Services.DTOs
 {
-    public class PublisherCreateDTO
+    public class PublisherCreateDTO : RegistryDTO
     {
         public int Id { get; set; }
         
