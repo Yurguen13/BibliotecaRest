@@ -43,6 +43,7 @@ namespace BibliotecaRest.Controllers
         {
             try
             {
+                await _classificationService.AddAsync(classificationDTO);
                 return CreatedAtAction(nameof(GetById), new { id = classificationDTO.Id }, classificationDTO);
             }
             catch (Exception ex)
