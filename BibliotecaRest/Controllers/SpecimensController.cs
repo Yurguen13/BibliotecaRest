@@ -40,7 +40,9 @@ namespace BibliotecaRest.Controllers
         {
             try
             {
-                return CreatedAtAction(nameof(GetById), new { id = specimenDTO.Id }, specimenDTO);
+                await _specimensService.AddAsync(specimenDTO);
+                return CreatedAtAction(
+                    nameof(GetById), new { id = specimenDTO.Id }, specimenDTO);
             }
             catch (Exception ex)
             {
