@@ -29,6 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // uno por request
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthosService, AuthorService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 
 

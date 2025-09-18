@@ -75,6 +75,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                 boo.Year = books.Year;
                 boo.ClassificationId = books.ClassificationId;
                 boo.PublisherId = books.PublisherId;
+                
 
 
 
