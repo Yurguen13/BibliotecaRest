@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Rest.Services.DTOs
 {
-    public class ClassificationReadDTO
+    public class ClassificationReadDTO : RegistryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

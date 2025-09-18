@@ -8,7 +8,7 @@ using BibliotecaRest.Data.Models;
 
 namespace Biblioteca.Rest.Services.DTOs
 {
-    public class PublisherReadDTO
+    public class PublisherReadDTO : RegistryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
