@@ -41,6 +41,7 @@ namespace BibliotecaRest.Controllers
         {
             try
             {
+                await _publisherService.AddAsync(publisherDTO);
                 return CreatedAtAction(nameof (GetById), new { id = publisherDTO.Id }, publisherDTO);
             }
             catch(Exception ex)
