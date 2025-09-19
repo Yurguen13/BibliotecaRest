@@ -69,6 +69,9 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                        Year = x.Year,
                        Publisher = x.Publisher.Name,
                        Classification = x.Classification.Name,
+                       PublisherId=x.PublisherId,
+                       ClassificationId=x.ClassificationId,
+                       path=x.path,
 
                        Active = x.Active
 
@@ -129,6 +132,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                 boo.Year = books.Year;
                 boo.ClassificationId = books.ClassificationId;
                 boo.PublisherId = books.PublisherId;
+                boo.path = urlImagen;
                 
 
 

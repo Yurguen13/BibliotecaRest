@@ -51,6 +51,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                        Id = x.Id,
                        Name = x.Name,
                        LastName = x.LastName,
+                       Email = x.Email,
                        Birthdate = x.Birthdate,
                        Phone = x.Phone,
                        Active = x.Active
