@@ -41,8 +41,7 @@ namespace BibliotecaRest.Controllers
             try
             {
                 await _specimensService.AddAsync(specimenDTO);
-                return CreatedAtAction(
-                    nameof(GetById), new { id = specimenDTO.Id }, specimenDTO);
+                return CreatedAtAction(nameof(GetById), new { id = specimenDTO.Id }, specimenDTO);
             }
             catch (Exception ex)
             {
