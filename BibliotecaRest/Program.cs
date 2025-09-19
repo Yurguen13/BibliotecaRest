@@ -64,6 +64,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// app.UseStaticFiles();  // wwwroot
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
