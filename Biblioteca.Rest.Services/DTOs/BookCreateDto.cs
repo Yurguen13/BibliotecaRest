@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,5 +23,6 @@ namespace Biblioteca.Rest.Services.DTOs
         public int Year { get; set; }
         public int PublisherId { get; set; }
         public int ClassificationId { get; set; }
+        public IFormFile file { get; set; }
     }
 }

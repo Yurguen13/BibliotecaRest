@@ -40,7 +40,8 @@ namespace BibliotecaRest.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(BookCreateDto create)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Create([FromForm] BookCreateDto create)
         {
             try
             {

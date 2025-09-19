@@ -3,6 +3,7 @@ using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
 using BibliotecaRest.Data.Models;
+using EcommerRest.Services.Settings;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Hosting;
+
+
+using Microsoft.AspNetCore.Http;
+
 namespace Biblioteca.Rest.Services.Services.Implementations
 {
-    public  class BookService : IBookService
+    public class BookService : IBookService
     {
         private readonly ApplicationDbContext _context;
+        public readonly IWebHostEnvironment _env;
+        public readonly UploadSettings _uploadSettings;
 
-        public BookService(ApplicationDbContext context)
+        public BookService(ApplicationDbContext context,
+            IWebHostEnvironment env,
+            UploadSettings uploadSettings
+            )
         {
             _context = context;
+            _env = env;
+            _uploadSettings = uploadSettings;
         }
 
         public async Task<ICollection<BookReadDto>> GetAllAsync()
@@ -64,8 +77,49 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             return books;
         }
 
+        private async Task<string> UploadImage(IFormFile file)
+        {
+            ValidateFile(file);
+
+            string _customPath = Path.Combine(Directory.GetCurrentDirectory(), _uploadSettings.UploadDirectory);
+            //    string _customPath = Path.Combine(_env.WebRootPath, uploadSettings.UploadDirectory);
+
+            if (!Directory.Exists(_customPath))   // Crear el directorio si no existe
+            {
+                Directory.CreateDirectory(_customPath);
+            }
+
+            // Generar el nombre único del archivo
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName)
+                            + Guid.NewGuid().ToString()
+                            + Path.GetExtension(file.FileName);
+            var filePath = Path.Combine(_customPath, fileName);
+
+            // Guardar el archivo
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Retornar la ruta relativa o completa, según sea necesario
+            return $"/{_uploadSettings.UploadDirectory}/{fileName}";
+        }
+
+
+        private void ValidateFile(IFormFile file)
+        {
+            var permittedExtensions = _uploadSettings.AllowedExtensions.Split(',');
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            if (!permittedExtensions.Contains(extension))
+            {
+                //throw new NotSupportedException("El tipo de archivo no es soportado.");
+                //   throw new NotSupportedException(Messages.Validation.UnSupportedFileType);
+            }
+        }
         public async Task<bool> AddAsync(BookCreateDto books)
         {
+            var urlImagen = await UploadImage(books.file);
             try
             {
                 Books boo = new Books();
