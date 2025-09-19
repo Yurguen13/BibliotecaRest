@@ -46,6 +46,9 @@ builder.Services.AddSingleton(sp =>
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthosService, AuthorService>();
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IClassificationService, ClassificationService>();
+builder.Services.AddScoped<IPublisherService, PublisherService>();
+builder.Services.AddScoped<ISpecimensService, SpecimensService>();
 
 
 
