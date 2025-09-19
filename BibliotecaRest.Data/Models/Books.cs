@@ -23,7 +23,7 @@ namespace BibliotecaRest.Data.Models
         public int PublisherId { get; set; }
         public int ClassificationId { get; set; } 
 
-        public string path { get; set; }
+        public string? path { get; set; }
 
         public Classification Classification { get; set; }
         public Publisher Publisher { get; set; }

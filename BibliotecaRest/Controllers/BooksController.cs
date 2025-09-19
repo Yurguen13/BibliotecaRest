@@ -64,7 +64,8 @@ namespace BibliotecaRest.Controllers
 
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, BookCreateDto create)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromForm] BookCreateDto create)
         {
             try
             {

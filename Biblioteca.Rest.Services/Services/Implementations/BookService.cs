@@ -71,7 +71,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                        Classification = x.Classification.Name,
                        PublisherId=x.PublisherId,
                        ClassificationId=x.ClassificationId,
-                       path=x.path,
+                       path=x.path !=null  ? x.path : "",
 
                        Active = x.Active
 
@@ -122,17 +122,23 @@ namespace Biblioteca.Rest.Services.Services.Implementations
         }
         public async Task<bool> AddAsync(BookCreateDto books)
         {
-            var urlImagen = await UploadImage(books.file);
+            Books boo = new Books();
+            if (books.file!=null)
+            {
+                var urlImagen = await UploadImage(books.file);
+                boo.path = urlImagen;
+            }
+          
             try
             {
-                Books boo = new Books();
+              
                 //  cate.Id = category.Id;
                 boo.Name = books.Name;
                 boo.Language = books.Language;
                 boo.Year = books.Year;
                 boo.ClassificationId = books.ClassificationId;
                 boo.PublisherId = books.PublisherId;
-                boo.path = urlImagen;
+              
                 
 
 
@@ -154,6 +160,15 @@ namespace Biblioteca.Rest.Services.Services.Implementations
         {
             var book = await _context.Books.FindAsync(id);
 
+            if (books.file != null)
+            {
+                var urlImagen = await UploadImage(books.file);
+
+                book.path = urlImagen;
+            }
+
+       
+
             if (book == null)
             {
                 return false;
@@ -163,6 +178,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             book.Year = books.Year;
             book.PublisherId = books.PublisherId;
             book.ClassificationId = books.ClassificationId;
+          
             await _context.SaveChangesAsync();
 
             return true;

@@ -4,6 +4,7 @@ using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
 using BibliotecaRest.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,13 @@ namespace Biblioteca.Rest.Services.Services.Implementations
     public class AuthorService : IAuthosService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<AuthorService> _logger;
 
-        public AuthorService(ApplicationDbContext context)
+        public AuthorService(ApplicationDbContext context,
+              ILogger<AuthorService> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<ICollection<AuthorReadDto>> GetAllAsync()
@@ -63,6 +67,8 @@ namespace Biblioteca.Rest.Services.Services.Implementations
 
         public async Task<bool> AddAsync(AuthorCreateDto authors)
         {
+
+            _logger.LogInformation("----Author is startp");
             try
             {
                 Author author = new Author();
