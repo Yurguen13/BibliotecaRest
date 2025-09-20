@@ -8,6 +8,7 @@ using Biblioteca.Rest.Services.DTOs;
 using Biblioteca.Rest.Services.Services.Interfaces;
 using BibliotecaRest.Data.Data;
 using BibliotecaRest.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Rest.Services.Services.Implementations
@@ -30,6 +31,7 @@ namespace Biblioteca.Rest.Services.Services.Implementations
                     Id = s.Id,
                     Price = s.Price,
                     BooksId = s.BooksId,
+                    Books=s.Books.Name,
                     Condition = s.Condition,
                     Observations = s.Observations
                 })
@@ -70,10 +72,11 @@ namespace Biblioteca.Rest.Services.Services.Implementations
             return true;
         }
 
+        
         public async Task<bool> UpdateAsync(int id,  SpecimensCreateDTO specimenDTO)
         {
             var specimen = await _context.Specimens
-               .FindAsync(specimenDTO.Id);
+               .FindAsync(id);
 
             if (specimen == null)
                 throw new ApplicationException(Messages.Error.SpecimenNotFound);

@@ -54,7 +54,7 @@ namespace BibliotecaRest.Controllers
         {
             if (id != specimenDTO.Id)
             {
-                return BadRequest(new { message = "El ID del ruta no coincide con el ID del especimen" });
+             //   return BadRequest(new { message = "El ID del ruta no coincide con el ID del especimen" });
             }
 
             var existingPublisher = await _specimensService.GetByIdAsync(id);
